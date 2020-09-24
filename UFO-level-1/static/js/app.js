@@ -2,28 +2,28 @@
 var tableData = data;
 
 // YOUR CODE HERE!
-// var $tbody = document.querySelector("tbody");
-// var $dateInput = document.querySelector("#datetime");
-// var $searchBtn = document.querySelector("#filter-btn");
-var $tbody = d3.select("tbody");
-var $dateInput = d3.select("#datetime").node();
-var $searchBtn = d3.select("#filter-btn").node();
+var $tbody = document.querySelector("tbody");
+var $dateInput = document.querySelector("#datetime");
+var $button = document.querySelector("#filter-btn");
+// var $tbody = d3.select("tbody");
+// var $dateInput = d3.select("#datetime").node();
+// var $searchBtn = d3.select("#filter-btn").node();
 
-// Add an event listener to the searchButton, call handleSearchButtonClick when clicked
-$searchBtn.addEventListener("click", handleSearchButtonClick);
+// Add event listener to the button, with a function when clicked
+$button.addEventListener("click", handleSearchButtonClick);
 
-// renderTable renders the tableData to the tbody
+// renderTable outputs data into tbody
 function renderTable() {
   $tbody.innerHTML = "";
   for (var i = 0; i < tableData.length; i++) {
-    // Get get the current data object and its fields
+    
     var data = tableData[i];
     var fields = Object.keys(data);
-    // Create a new row in the tbody, set the index to be i + startingIndex
-    var $row = $tbody.insertRow(i);
+   
+    var row = $tbody.insertRow(i);
     for (var j = 0; j < fields.length; j++) {
       var field = fields[j];
-      var $cell = $row.insertCell(j);
+      var $cell = row.insertCell(j);
       $cell.innerText = data[field];
     }
   }
@@ -49,5 +49,5 @@ function resetData() {
   renderTable();
 }
 
-// Render the table for the first time on page load
+// Render the table on page load
 renderTable();
