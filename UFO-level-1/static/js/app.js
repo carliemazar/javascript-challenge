@@ -5,6 +5,9 @@ var tableData = data;
 var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#datetime");
 var $searchBtn = document.querySelector("#filter-btn");
+// var $tbody = d3.select("tbody");
+// var $dateInput = d3.select("#datetime");
+// var $searchBtn = d3.select("#filter-btn");
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
