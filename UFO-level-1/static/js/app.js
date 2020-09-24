@@ -3,7 +3,7 @@ var tableData = data;
 
 // YOUR CODE HERE!
 var $tbody = document.querySelector("tbody");
-var $dateInput = document.querySelector("#datetime");
+var $date = document.querySelector("#datetime");
 var $button = document.querySelector("#filter-btn");
 // var $tbody = d3.select("tbody");
 // var $dateInput = d3.select("#datetime").node();
@@ -18,13 +18,13 @@ function renderTable() {
   for (var i = 0; i < tableData.length; i++) {
     
     var data = tableData[i];
-    var fields = Object.keys(data);
+    var inputs = Object.keys(data);
    
     var row = $tbody.insertRow(i);
-    for (var j = 0; j < fields.length; j++) {
-      var field = fields[j];
+    for (var j = 0; j < inputs.length; j++) {
+      var input = inputs[j];
       var $cell = row.insertCell(j);
-      $cell.innerText = data[field];
+      $cell.innerText = data[input];
     }
   }
 }
@@ -33,18 +33,18 @@ function handleSearchButtonClick(event) {
   // prevent page from refreshing
   event.preventDefault();
 
-  var filterDate = $dateInput.value.trim();
-  if (filterDate != "") {
+  var DateFilter = $date.value.trim();
+  if (DateFilter != "") {
     tableData = data.filter(function (data) {
-      var dataDate = data.datetime;
-      return dataDate === filterDate;
+      var DateField = data.datetime;
+      return DateField === DateFilter;
     });
 };
 renderTable();
   }
 function resetData() {
   tableData = data;
-  $dateInput.value = "";
+  $date.value = "";
 
   renderTable();
 }
