@@ -24,9 +24,43 @@ $button.addEventListener("click", handleSearchButtonClick);
 
 // renderTable outputs data into tbody
 function renderTable() {
-  $tbody.innerHTML = "";
+    $tbody.innerHTML = "";
+    for (var i = 0; i < tableData.length; i++) {
+      
+      var data = tableData[i];
+      var inputs = Object.keys(data);
+     
+      var row = $tbody.insertRow(i);
+      for (var j = 0; j < inputs.length; j++) {
+        var input = inputs[j];
+        var $cell = row.insertCell(j);
+        $cell.innerText = data[input];
+      }
+    }
+  }
+  
+  function handleSearchButtonClick(event) {
+    // prevent page from refreshing
+    event.preventDefault();
+  
+    var DateFilter = $date.value.trim();
+    if (DateFilter != "") {
+      tableData = data.filter(function (data) {
+        var DateField = data.datetime;
+        return DateField === DateFilter;
+      });
+  };
+  renderTable();
+    }
+  function resetData() {
+    tableData = data;
+    $date.value = "";
+  
+    renderTable();
+  }
+
   for (var i = 0; i < tableData.length; i++) {
-    
+      
     var data = tableData[i];
     var inputs = Object.keys(data);
    
@@ -37,37 +71,25 @@ function renderTable() {
       $cell.innerText = data[input];
     }
   }
-}
 
-function handleSearchButtonClick(event) {
-  // prevent page from refreshing
-  event.preventDefault();
-
-  var DateFilter = $date.value.trim();
-  if (DateFilter != "") {
-    tableData = data.filter(function (data) {
-      var DateField = data.datetime;
-      return DateField === DateFilter;
-    });
-
- // Add in more ways to filter through city, state, country, shape
- var CityFilter = $city.value.trim();
- if (CityFilter != "") {
-   tableData = data.filter(function (data) {
-     var CityField = data.city;
-     return CityField === CityFilter;
-   });
-
-
-    renderTable();
-    {
-    function resetData() {
-    tableData = data;
-    $date.value = "";
-    $city.value = "";
-
+  function handleSearchButtonClick(event) {
+    // prevent page from refreshing
+    event.preventDefault();
+  
+    var CityFilter = $city.value.trim();
+    if (CityFilter != "") {
+      tableData = data.filter(function (data) {
+        var CityField = data.city;
+        return CityField === CityFilter;
+      });
+  };
   renderTable();
-};
-
-// Render the table on page load
-renderTable();
+    }
+  function resetData() {
+    tableData = data;
+    $city.value = "";
+  
+    renderTable();
+  }
+  // Render the table on page load
+  renderTable();
